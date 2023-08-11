@@ -131,6 +131,42 @@ button:before {
     border: none;
     outline: none;
     color: #3b5cc5;
+    text-align: center;
+    font-size: 55px;
+    font-family: Handjet-Regular;
+}
+
+.input-show-correct {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px black;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    text-align: center;
+    background-color: #57cc4b;
+    font-size: 55px;
+    font-family: Handjet-Regular;
+}
+
+.input-show-false {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px black;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    background-color: rgba(227, 15, 15, 0.76);
+    text-align: center;
+    font-size: 55px;
+
+    font-family: Handjet-Regular;
 }
 
 .footer {
@@ -183,6 +219,7 @@ input[type='number'] {
 
 .client-info {
     margin-top: 20px;
+    font-family: Tahoma;
 }
 
 /*Media Queries*/
