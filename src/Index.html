@@ -4,12 +4,18 @@
   <meta charset='UTF-8' />
   <title>Guess Number Game</title>
   <link href='Style.css' rel='stylesheet' />
-  <link href='Assets/Icons/favicon.ico' rel='shortcut icon' type='image/x-icon'>
+  <link
+    href='Assets/Icons/favicon.ico'
+    rel='shortcut icon'
+    type='image/x-icon'
+  />
 </head>
 <body>
 <div class='container'>
   <header class='header'>
-    <button class='button again-button' role='button'>Again</button>
+    <button class='button again-button' id='again-button' role='button'>
+      Again
+    </button>
     <span class='header-text-box'>
           <h1>Between 1 and 20</h1>
         </span>
@@ -23,7 +29,7 @@
   <footer class='footer'>
     <div class='footer-left-side'>
       <input class='input-number' id='input-number' type='number' />
-      <button class='button check-button'>Check</button>
+      <button class='button check-button' id='check-button'>Check</button>
     </div>
     <div class='footer-right-side'>
       <h1 class='client-info' id='guess-high-low'></h1>
