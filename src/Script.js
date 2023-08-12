@@ -1,65 +1,65 @@
 let buttonAgain = document.getElementById('again-button');
-let inputShowCorrectResult = document.getElementById('input-show');
+let inputShowResult = document.getElementById('input-show');
 let inputGuessNumber = document.getElementById('input-number');
 let buttonCheck = document.getElementById('check-button');
-let guessHighLow = document.getElementById('guess-high-low');
+let highOrLowText = document.getElementById('guess-high-low');
 let userScore = document.getElementById('score');
 let userHighScore = document.getElementById('high-score');
-let randomNumber = Math.floor(Math.random() * 20) + 1;
+let secretNumber = Math.floor(Math.random() * 20) + 1;
 let score = 20;
 let numberCondition = 'Start Guessing...';
 let recordHighScore = '';
-guessHighLow.textContent = numberCondition;
+highOrLowText.textContent = numberCondition;
 userHighScore.textContent = `High Score: ${recordHighScore}`;
-userScore.textContent = `Score: ${score}`;
+userScore.textContent = score;
 let historyHighScore = [];
 
 function checkUserGuess() {
-  if (inputGuessNumber.value == randomNumber) {
-    guessHighLow.textContent = 'Guess correct';
+  if (inputGuessNumber.value == secretNumber) {
+    highOrLowText.textContent = 'Guess correct';
     recordHighScore = score;
     historyHighScore.push(recordHighScore);
     userHighScore.textContent = `HighScore: ${Math.max(...historyHighScore)}`;
-    userScore.textContent = `Score: ${score}`;
-    inputShowCorrectResult.value = inputGuessNumber.value;
-    inputShowCorrectResult.classList.remove('input-show-false');
-    inputShowCorrectResult.classList.add('input-show-correct');
+    userScore.textContent = score;
+    inputShowResult.value = inputGuessNumber.value;
+    inputShowResult.classList.remove('input-show-false');
+    inputShowResult.classList.add('input-show-correct');
   } else if (!inputGuessNumber.value) {
     alert('no number');
   } else if (
     inputGuessNumber.value >= 0 &&
     inputGuessNumber.value <= 20 &&
-    inputGuessNumber.value !== randomNumber &&
-    inputGuessNumber.value > randomNumber
+    inputGuessNumber.value !== secretNumber &&
+    inputGuessNumber.value > secretNumber
   ) {
-    guessHighLow.textContent = 'Guess to high';
-    inputShowCorrectResult.value = inputGuessNumber.value;
-    inputShowCorrectResult.classList.add('input-show-false');
+    highOrLowText.textContent = 'Guess to high';
+    inputShowResult.value = inputGuessNumber.value;
+    inputShowResult.classList.add('input-show-false');
     score--;
-    userScore.textContent = `Score: ${score}`;
+    userScore.textContent = score;
   } else if (
     inputGuessNumber.value >= 0 &&
     inputGuessNumber.value <= 20 &&
-    inputGuessNumber.value !== randomNumber &&
-    inputGuessNumber.value < randomNumber
+    inputGuessNumber.value !== secretNumber &&
+    inputGuessNumber.value < secretNumber
   ) {
-    guessHighLow.textContent = 'Guess to low';
-    inputShowCorrectResult.value = inputGuessNumber.value;
-    inputShowCorrectResult.classList.add('input-show-false');
+    highOrLowText.textContent = 'Guess to low';
+    inputShowResult.value = inputGuessNumber.value;
+    inputShowResult.classList.add('input-show-false');
     score--;
-    userScore.textContent = `Score: ${score}`;
+    userScore.textContent = `${score}`;
   } else if (inputGuessNumber.value > 20) {
-    guessHighLow.textContent = 'Guess has higher than 20';
-    inputShowCorrectResult.value = inputGuessNumber.value;
-    inputShowCorrectResult.classList.add('input-show-false');
+    highOrLowText.textContent = 'Guess has higher than 20';
+    inputShowResult.value = inputGuessNumber.value;
+    inputShowResult.classList.add('input-show-false');
     score--;
-    userScore.textContent = `Score: ${score}`;
+    userScore.textContent = `${score}`;
   } else if (inputGuessNumber.value < 0) {
-    guessHighLow.textContent = 'Guess lower than 0';
-    inputShowCorrectResult.value = inputGuessNumber.value;
-    inputShowCorrectResult.classList.add('input-show-false');
+    highOrLowText.textContent = 'Guess lower than 0';
+    inputShowResult.value = inputGuessNumber.value;
+    inputShowResult.classList.add('input-show-false');
     score--;
-    userScore.textContent = `Score: ${score}`;
+    userScore.textContent = score;
   }
   if (score == 0) {
     alert('You try many times');
@@ -68,9 +68,13 @@ function checkUserGuess() {
 }
 
 function againUser() {
-  randomNumber = Math.floor(Math.random() * 20) + 1;
+  secretNumber = Math.floor(Math.random() * 20) + 1;
   score = 20;
-  userScore.textContent = `Score: ${score}`;
+  userScore.textContent = score;
+  inputGuessNumber.value = 0;
+  inputShowResult.value = null;
+  inputShowResult.classList.remove('input-show-false');
+  inputShowResult.classList.remove('input-show-correct');
 }
 
 buttonAgain.addEventListener('click', againUser);
