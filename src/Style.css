@@ -123,22 +123,22 @@ button:before {
     color: #fcfcfd;
 }
 
-.input-show {
+.box-show {
     width: 150px;
     height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 50%;
     box-shadow: 0 0 10px black;
     padding: 10px;
     margin: 30px;
-    border: none;
-    outline: none;
-    color: #efeded;
-    text-align: center;
+    background: #FFF;
     font-size: 55px;
     font-family: Handjet-Regular;
 }
 
-.input-show-correct {
+.input-value-show-correct {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -154,7 +154,7 @@ button:before {
     font-family: Handjet-Regular;
 }
 
-.input-show-false {
+.input-value-show-false {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -219,7 +219,7 @@ input[type='number'] {
     align-items: center;
 }
 
-.client-info {
+.user-condition {
     margin-top: 20px;
     font-family: Tahoma;
 }
@@ -247,11 +247,19 @@ input[type='number'] {
         justify-content: center;
         align-items: center;
     }
+
+    .footer-right-side h1 {
+        font-size: 25px;
+    }
 }
 
 @media (max-width: 419px) {
     .main-text-box {
         font-size: 12px;
+    }
+
+    .footer-right-side h1 {
+        font-size: 16px;
     }
 }
 

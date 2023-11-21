@@ -1,81 +1,59 @@
-let buttonAgain = document.getElementById('again-button');
-let inputShowResult = document.getElementById('input-show');
-let inputGuessNumber = document.getElementById('input-number');
-let buttonCheck = document.getElementById('check-button');
-let highOrLowText = document.getElementById('guess-high-low');
+let secretNumber;
+let createSecretNumber = () => Math.floor(Math.random() * 20) + 1;
+let setSecretNumber = () => (secretNumber = createSecretNumber());
+
+function userGuessedNumberCondition(value) {
+  if (!value) return 'Empty field';
+  if (Number(value) > 20) return 'Grather than 20';
+  if (Number(value) < 0) return 'Lower than 0';
+  if (Number(value) > secretNumber) return 'Grather than answer';
+  if (Number(value) < secretNumber) return 'Lower than answer';
+}
+
+document.addEventListener('DOMContentLoaded', () => setSecretNumber());
 let userScore = document.getElementById('score');
 let userHighScore = document.getElementById('high-score');
-let secretNumber = Math.floor(Math.random() * 20) + 1;
+let guessedHighLow = document.getElementById('guess-high-low');
+let checkButton = document.getElementById('check-button');
+let userGuessNumberInput = document.getElementById('input-number');
+let boxShowCondition = document.getElementById('box-show');
 let score = 20;
-let numberCondition = 'Start Guessing...';
-let recordHighScore = '';
-highOrLowText.textContent = numberCondition;
-userHighScore.textContent = `High Score: ${recordHighScore}`;
-userScore.textContent = score;
-let historyHighScore = [];
+let highScoreData = [];
+checkButton.addEventListener('click', e => {
+  e.preventDefault();
+  if (score > 0) {
+    if (secretNumber === Number(userGuessNumberInput.value)) {
+      userScore.textContent = score;
+      guessedHighLow.textContent = 'Your guess correct 😍';
+      boxShowCondition.textContent = secretNumber;
+      highScoreData = [...highScoreData, score];
+      userHighScore.textContent = `${Math.max(...highScoreData)}`;
+      checkButton.disabled = true;
+      boxShowCondition.classList.remove('input-value-show-false');
+      boxShowCondition.classList.add('input-value-show-correct');
+      console.log(highScoreData);
+    } else {
+      --score;
+      userScore.textContent = score;
+      guessedHighLow.textContent = userGuessedNumberCondition(
+        userGuessNumberInput.value,
+      );
+      boxShowCondition.textContent = userGuessNumberInput.value;
+      boxShowCondition.classList.add('input-value-show-false');
+    }
+  } else guessedHighLow.textContent = 'You tried too hard';
+});
 
-function checkUserGuess() {
-  if (inputGuessNumber.value == secretNumber) {
-    highOrLowText.textContent = 'Guess correct';
-    recordHighScore = score;
-    historyHighScore.push(recordHighScore);
-    userHighScore.textContent = `HighScore: ${Math.max(...historyHighScore)}`;
-    userScore.textContent = score;
-    inputShowResult.value = inputGuessNumber.value;
-    inputShowResult.classList.remove('input-show-false');
-    inputShowResult.classList.add('input-show-correct');
-  } else if (!inputGuessNumber.value) {
-    alert('no number');
-  } else if (
-    inputGuessNumber.value >= 0 &&
-    inputGuessNumber.value <= 20 &&
-    inputGuessNumber.value !== secretNumber &&
-    inputGuessNumber.value > secretNumber
-  ) {
-    highOrLowText.textContent = 'Guess to high';
-    inputShowResult.value = inputGuessNumber.value;
-    inputShowResult.classList.add('input-show-false');
-    score--;
-    userScore.textContent = score;
-  } else if (
-    inputGuessNumber.value >= 0 &&
-    inputGuessNumber.value <= 20 &&
-    inputGuessNumber.value !== secretNumber &&
-    inputGuessNumber.value < secretNumber
-  ) {
-    highOrLowText.textContent = 'Guess to low';
-    inputShowResult.value = inputGuessNumber.value;
-    inputShowResult.classList.add('input-show-false');
-    score--;
-    userScore.textContent = `${score}`;
-  } else if (inputGuessNumber.value > 20) {
-    highOrLowText.textContent = 'Guess has higher than 20';
-    inputShowResult.value = inputGuessNumber.value;
-    inputShowResult.classList.add('input-show-false');
-    score--;
-    userScore.textContent = `${score}`;
-  } else if (inputGuessNumber.value < 0) {
-    highOrLowText.textContent = 'Guess lower than 0';
-    inputShowResult.value = inputGuessNumber.value;
-    inputShowResult.classList.add('input-show-false');
-    score--;
-    userScore.textContent = score;
-  }
-  if (score == 0) {
-    alert('You try many times');
-    buttonCheck.disabled = true;
-  }
-}
-
-function againUser() {
-  secretNumber = Math.floor(Math.random() * 20) + 1;
+let againButton = document.getElementById('again-button');
+againButton.addEventListener('click', () => {
+  setSecretNumber();
+  boxShowCondition.textContent = '';
+  boxShowCondition.classList.remove(
+    'input-value-show-correct',
+    'input-value-show-false',
+  );
+  checkButton.disabled = false;
+  userGuessNumberInput.value = 0;
   score = 20;
   userScore.textContent = score;
-  inputGuessNumber.value = 0;
-  inputShowResult.value = null;
-  inputShowResult.classList.remove('input-show-false');
-  inputShowResult.classList.remove('input-show-correct');
-}
-
-buttonAgain.addEventListener('click', againUser);
-buttonCheck.addEventListener('click', checkUserGuess);
+});
